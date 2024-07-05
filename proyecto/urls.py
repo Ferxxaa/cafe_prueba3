@@ -27,6 +27,8 @@ urlpatterns = [
     path('', views.login_t, name='login'),
     path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('admin/lista_compras/', views.lista_compras_admin, name='lista_compras_admin'),
+    
 ]
     
     

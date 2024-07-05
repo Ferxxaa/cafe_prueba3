@@ -1,0 +1,42 @@
+<!-- proyecto/templates/proyecto/lista_compras_admin.html -->
+
+{% extends 'proyecto/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="alert alert-primary" role="alert">
+        <h2 class="text-center mb-4">Listado de Compras</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Fecha de Compra</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for compra in compras %}
+                        <tr>
+                            <td>{{ compra.fecha_compra }}</td>
+                            <td>{{ compra.usuario.username }}</td>
+                            <td>{{ compra.producto.nombre }}</td>
+                            <td>{{ compra.cantidad }}</td>
+                            <td>${{ compra.total }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center">No hay compras registradas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

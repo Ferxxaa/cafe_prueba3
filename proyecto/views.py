@@ -12,6 +12,8 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from proyecto.forms import CustomUserChangeForm
+from django.contrib.admin.views.decorators import staff_member_required
+from django.http import HttpResponseForbidden
 
 
 # Create your views here.
@@ -268,3 +270,12 @@ def edit_profile(request):
         'user_form': user_form,
     }
     return render(request, 'proyecto/edit_profile.html', context)
+
+@login_required
+def lista_compras_admin(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden('No tienes permiso para acceder a esta página.')
+    
+    compras = Compra.objects.all().order_by('-fecha_compra')
+    return render(request, 'proyecto/lista_compras.html', {'compras': compras})
+
