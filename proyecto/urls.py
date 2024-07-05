@@ -25,7 +25,8 @@ urlpatterns = [
     path('factura/', views.generar_factura, name='factura'),
     path('registro/', views.registrar_cliente, name='registro_cliente'),
     path('', views.login_t, name='login'),
-    
+    path('profile/', views.profile, name='profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
 ]
     
     

@@ -61,7 +61,7 @@
 						<li class="dropdown">
 							<div class="container-user">
 								{% if user.is_authenticated %}
-									<span class="username">Hola, {{ user.username }}</span>
+									<a href="{% url 'profile' %}" class="username">Hola, {{ user.username }}</a>
 								{% else %}
 									<a href="{% url 'login_t' %}">
 										<i class="fa-solid fa-user"></i>

@@ -1,0 +1,67 @@
+<!-- proyecto/templates/proyecto/edit_profile.html -->
+
+{% extends 'proyecto/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .edit-profile-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .edit-profile-container h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .edit-profile-container form {
+        margin-bottom: 20px;
+    }
+
+    .edit-profile-container form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .edit-profile-container form input[type="text"],
+    .edit-profile-container form input[type="email"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+
+    .edit-profile-container form button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .edit-profile-container form button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="edit-profile-container">
+    <h2>Editar perfil</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+</div>
+{% endblock %}

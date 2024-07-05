@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from decimal import Decimal
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from proyecto.forms import CustomUserChangeForm
 
 
 # Create your views here.
@@ -218,3 +222,49 @@ def registrar_cliente(request):
 
     return render(request, 'proyecto/registro.html')
 
+@login_required
+def profile(request):
+    user = request.user
+    if request.method == 'POST':
+        user_form = CustomUserChangeForm(request.POST, instance=user)
+        password_form = PasswordChangeForm(user, request.POST)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Tu perfil ha sido actualizado correctamente.')
+            return redirect('profile')
+        elif password_form.is_valid():
+            user = password_form.save()
+            update_session_auth_hash(request, user)  # Actualiza la sesión si la contraseña cambió
+            messages.success(request, 'Tu contraseña ha sido actualizada correctamente.')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Por favor, corrige los errores.')
+    else:
+        user_form = CustomUserChangeForm(instance=user)
+        password_form = PasswordChangeForm(user)
+    
+    context = {
+        'user': user,
+        'user_form': user_form,
+        'password_form': password_form,
+    }
+    return render(request, 'proyecto/profile.html', context)
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        user_form = CustomUserChangeForm(request.POST, instance=user)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Tu perfil ha sido actualizado correctamente.')
+            return redirect('edit_profile')
+        else:
+            messages.error(request, 'Por favor, corrige los errores.')
+    else:
+        user_form = CustomUserChangeForm(instance=user)
+    
+    context = {
+        'user_form': user_form,
+    }
+    return render(request, 'proyecto/edit_profile.html', context)
