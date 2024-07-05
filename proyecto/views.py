@@ -14,6 +14,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from proyecto.forms import CustomUserChangeForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponseForbidden
+from django.contrib import admin
 
 
 # Create your views here.
@@ -271,11 +272,28 @@ def edit_profile(request):
     }
     return render(request, 'proyecto/edit_profile.html', context)
 
-@login_required
-def lista_compras_admin(request):
-    if not request.user.is_staff:
-        return HttpResponseForbidden('No tienes permiso para acceder a esta página.')
-    
-    compras = Compra.objects.all().order_by('-fecha_compra')
+def lista_compras(request):
+    compras = Compra.objects.all()
     return render(request, 'proyecto/lista_compras.html', {'compras': compras})
+
+def finalizar_compra(request):
+    if request.method == 'POST':
+        carrito_items = request.session.get('carrito', {}).get('items', {})
+        usuario_actual = request.user  # Obtén el usuario actual
+
+        for key, value in carrito_items.items():
+            compra = Compra(
+                usuario=usuario_actual,
+                producto=value['nombre'],
+                precio=value['precio'],
+                cantidad=value['cantidad']
+            )
+            compra.save()
+
+        # Limpia el carrito después de registrar las compras
+        request.session['carrito'] = {'items': {}}  # Limpia el carrito en sesión
+
+        return redirect('exito_compra')  # Redirige a una página de éxito de compra
+
+    return render(request, 'proyecto/carrito.html')
 

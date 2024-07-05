@@ -20,8 +20,11 @@ class Compra(models.Model):
     total = models.DecimalField(max_digits=10, decimal_places=0)
     fecha_compra = models.DateTimeField(auto_now_add=True)
 
+    def total(self):
+        return self.precio * self.cantidad
+
     def __str__(self):
-        return f"Compra de {self.usuario.username} - Producto: {self.producto.nombre}"
+        return f'Compra de {self.producto} por {self.usuario.username}'
     
 class Cliente(models.Model):
     nombre_usuario = models.CharField(max_length=100, default='usuario_temporal')
