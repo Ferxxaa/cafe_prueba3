@@ -1,0 +1,48 @@
+{% extends 'proyecto/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="product-details">
+    <div class="product-image">
+        <img src="{% static 'img/cafe-helado.jpg' %}" alt="Capuchino">
+    </div>
+    <div class="product-info">
+        <h2>Capuchino</h2>
+        <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+        </div>
+        <p class="price">$1.350</p>
+        <p>​El capuchino es una bebida italiana preparada con espresso, leche vaporizada y espuma de leche. Se caracteriza por su equilibrio entre el café intenso y la suavidad láctea.</p>
+    
+        
+        
+    </div>
+</section>
+
+<section class="related-products">
+    <h2>Productos Relacionados</h2>
+    <div class="related-product">
+        <div class="product-image">
+            <img src="{% static 'img/cafe-irish.jpg' %}" alt="Café Irish">
+        </div>
+        <div class="product-info">
+            <h3>Café Irish</h3>
+            <p class="price">$2.000</p>
+        </div>
+    </div>
+    <div class="related-product">
+        <div class="product-image">
+            <img src="{% static 'img/cafe-ingles.jpg' %}" alt="Café Inglés">
+        </div>
+        <div class="product-info">
+            <h3>Café Inglés</h3>
+            <p class="price">$1.800</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'proyecto/base.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos_nosotros.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center">Nosotros</h2>
+            <img src="{{ imagen_url }}" class="img-fluid img-principal rounded mx-auto d-block mb-4" alt="Imagen Nosotros">
+            <p class="lead text-center">{{ descripcion }}</p>
+            <div class="contenido-principal">
+                <p>En {{ nombre_cafeteria }}, nos enorgullece ofrecer una experiencia única en cafetería, donde cada taza de café es preparada con pasión y dedicación por nuestro equipo. Fundada por un apasionado barista chileno, nuestra cafetería se ha convertido en un lugar emblemático en la comunidad local.</p>
+                <p>Además de nuestro excepcional café, en {{ nombre_cafeteria }} nos esforzamos por mantener un ambiente acogedor y amigable, donde nuestros clientes pueden disfrutar de momentos especiales y relajantes.</p>
+            </div>
+            <ul class="list-unstyled lista-detalles">
+                <li><strong>Nombre:</strong> {{ nombre_cafeteria }}</li>
+                <li><strong>Dirección:</strong> {{ direccion }}</li>
+                <li><strong>Teléfono:</strong> {{ telefono }}</li>
+                <li><strong>Email:</strong> <a href="mailto:{{ email }}">{{ email }}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

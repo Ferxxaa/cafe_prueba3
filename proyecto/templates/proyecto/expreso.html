@@ -1,0 +1,52 @@
+<!-- cafe_expreso.html -->
+{% extends 'proyecto/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="product-details">
+    <div class="product-image">
+        <img src="{% static 'img/cafe-viena.jpg' %}" alt="Café Expreso">
+    </div>
+    <div class="product-info">
+        <h2>Café Expreso</h2>
+        <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+        </div>
+        <p class="price">$1.200</p>
+        <p>​ Se caracteriza por su rápida preparación a una alta presión y por un sabor y textura más concentrados.</p>
+        
+       
+    </div>
+</section>
+
+<section class="related-products">
+    <h2>Productos Relacionados</h2>
+    <div class="related-product">
+        <div class="product-image">
+            <img src="{% static 'img/cafe-irish.jpg' %}" alt="Café Irish">
+        </div>
+        <div class="product-info">
+            <h3>Café Irish</h3>
+            <p class="price">$2.000</p>
+        </div>
+    </div>
+    <div class="related-product">
+        <div class="product-image">
+            <img src="{% static 'img/cafe-ingles.jpg' %}" alt="Café Inglés">
+        </div>
+        <div class="product-info">
+            <h3>Café Inglés</h3>
+            <p class="price">$1.800</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/carrito.js' %}"></script>
+{% endblock %}

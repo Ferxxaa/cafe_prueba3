@@ -1,0 +1,223 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Baristas</title>
+		<link rel="stylesheet"  href="{% static 'css/styles.css'  %}">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+It/jUpJWxyCGI3fUa/pXGm5q7uUy8c2JdS" crossorigin="anonymous"></script>
+
+	</head>
+	
+	<body>
+		<header>
+			<div class="container-hero">
+				<div class="container hero">
+					<div class="customer-support">
+						<i class="fa-solid fa-headset"></i>
+						<div class="content-customer-support">
+							<span class="text">Soporte al cliente</span>
+							<span class="number">123-456-7890</span>
+						</div>
+					</div>
+
+					<div class="container-logo">
+						<i class="fa-solid fa-mug-hot"></i>
+						<h1 class="logo"><a href="{% url 'home' %}">Baristas</a></h1>
+					</div>
+					<div class="container-user">
+						<a href="{% url 'login_t' %}">
+							
+						</a>
+						<div class="content-shopping-cart">
+							<a href="{% url 'carrito' %}">
+								<i class="fa-solid fa-basket-shopping"></i>
+								<span class="text"></span>
+								
+							</a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="container-navbar">
+				<nav class="navbar container">
+					<ul class="menu">
+						<li><a href="{% url 'home' %}">Inicio</a></li>
+						<li><a href="{% url 'moca' %}">Moca Helado</a></li>
+						<li><a href="{% url 'expreso' %}">Expreso</a></li>
+						<li><a href="{% url 'capuchino' %}">Capuchino</a></li>
+						<li><a href="{% url 'tienda' %}">Productos</a></li>
+						<li><a href="{% url 'beneficio' %}">Beneficios</a></li>
+						<li><a href="{% url 'logout' %}" id="logout-link">Cerrar sesión</a></li>
+						<li class="dropdown">
+							<div class="container-user">
+								{% if user.is_authenticated %}
+									<span class="username">Hola, {{ user.username }}</span>
+								{% else %}
+									<a href="{% url 'login_t' %}">
+										<i class="fa-solid fa-user"></i>
+									</a>
+								{% endif %}
+							</div>	
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+		</header>
+
+        {% block content %} {% endblock %}
+
+
+        <footer class="footer">
+			<div class="container container-footer">
+				<div class="menu-footer">
+					<div class="contact-info">
+						<p class="title-footer">Información de Contacto</p>
+						<ul>
+							<li>
+								Dirección: Santiago Centro # 894, Santaigo, Chile. 
+							</li>
+							<li>Teléfono: +56 9 53353867</li>
+							
+							<li>EmaiL: baristas@support.com</li>
+						</ul>
+						<div class="social-icons">
+							<span class="facebook">
+								<i class="fa-brands fa-facebook-f"></i>
+							</span>
+							<span class="twitter">
+								<i class="fa-brands fa-twitter"></i>
+							</span>
+							<span class="youtube">
+								<i class="fa-brands fa-youtube"></i>
+							</span>
+							<span class="pinterest">
+								<i class="fa-brands fa-pinterest-p"></i>
+							</span>
+							<span class="instagram">
+								<i class="fa-brands fa-instagram"></i>
+							</span>
+						</div>
+					</div>
+
+					<div class="information">
+						<p class="title-footer">Información</p>
+						<ul>
+							<li><a href="{% url 'nosotros' %}">Acerca de Nosotros</a></li>
+							
+							
+							<li><a href="#">Términos y condiciones</a></li>
+							<li><a href="#">Contactános</a></li>
+						</ul>
+					</div>
+
+					<div class="my-account">
+						<p class="title-footer">Mi cuenta</p>
+
+						<ul>
+							<li><a href="{% url 'login_t' %}">Mi cuenta</a></li>
+							
+							
+						</ul>
+					</div>
+
+					<div class="newsletter">
+						<p class="title-footer">Boletín informativo</p>
+
+						<div class="content">
+							<p>
+								Suscríbete a nuestros boletines ahora y mantente al
+								día con nuevas colecciones y ofertas exclusivas.
+							</p>
+							<input type="email" id="emailInput" placeholder="Ingresa el correo aquí...">
+							<button onclick="subscribe()">Suscríbete</button>
+							<p id="subscribeMessage" style="display: none;">¡Suscripción realizada correctamente! Gracias.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="copyright">
+					<p>
+						Desarrollado por Programación FerxitaCompany &copy; 2024
+					</p>
+
+					<img src="{% static 'img/payment.png'  %}" alt="Pagos">
+				</div>
+			</div>
+
+
+
+		</footer>
+
+		<script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
+		
+		<script>
+			function toggleDropdown() {
+				document.getElementById("dropdownContent").classList.toggle("show");
+			}
+	
+			// Cerrar el dropdown si se hace clic fuera de él
+			window.onclick = function(event) {
+				if (!event.target.matches('.username')) {
+					var dropdowns = document.getElementsByClassName("dropdown-content");
+					for (var i = 0; i < dropdowns.length; i++) {
+						var openDropdown = dropdowns[i];
+						if (openDropdown.classList.contains('show')) {
+							openDropdown.classList.remove('show');
+						}
+					}
+				}
+			}
+		</script>
+		<script>
+			function subscribe() {
+				// Aquí podrías agregar lógica para enviar el correo electrónico si fuera necesario
+		
+				// Mostrar mensaje de suscripción exitosa
+				document.getElementById('subscribeMessage').style.display = 'block';
+		
+				// Redireccionar a la página de inicio después de 3 segundos
+				setTimeout(function() {
+					window.location.href = '{% url "home" %}';
+				}, 3000); // 3000 milisegundos = 3 segundos
+			}
+		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				document.getElementById('logout-link').addEventListener('click', function(event) {
+					event.preventDefault(); // Evita que el enlace realice la acción predeterminada (navegar a una URL)
+			
+					// Crea un formulario dinámicamente
+					var form = document.createElement('form');
+					form.method = 'POST';
+					form.action = '{% url "logout" %}'; // URL de logout en Django
+					form.style.display = 'none'; // Oculta el formulario
+			
+					// Añade el token CSRF
+					var csrf_token = document.createElement('input');
+					csrf_token.type = 'hidden';
+					csrf_token.name = 'csrfmiddlewaretoken';
+					csrf_token.value = '{{ csrf_token }}'; // Valor del token CSRF generado por Django
+					form.appendChild(csrf_token);
+			
+					// Añade el formulario al cuerpo del documento
+					document.body.appendChild(form);
+			
+					// Envía el formulario
+					form.submit();
+				});
+			});
+			</script>
+
+	</body>
+</html>

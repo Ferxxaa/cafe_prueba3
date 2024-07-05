@@ -1,0 +1,44 @@
+{% extends 'proyecto/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        <h2 class="text-center mb-4">FACTURA</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in carrito.items %}
+                        <tr>
+                            <td>{{ value.nombre }}</td>
+                            <td>${{ value.precio }}</td>
+                            <td>{{ value.cantidad }}</td>
+                            <td>${{ value.acumulado }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="3" class="text-end">Total:</th>
+                        <td class="fw-bold">${{ total_carrito }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'home' %}" class="btn btn-primary">Enviar a Correo Electronico </a>
+    </div>
+</div>
+
+<!-- Enlace al archivo CSS -->
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+{% endblock %}

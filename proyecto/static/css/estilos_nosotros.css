@@ -1,0 +1,29 @@
+/* estilos_nosotros.css */
+
+/* Estilos para la imagen principal */
+.img-principal {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el contenido principal */
+.contenido-principal {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* Estilos para la lista de detalles */
+.lista-detalles {
+    margin-top: 20px;
+}
+
+.lista-detalles li {
+    margin-bottom: 10px;
+}
+
+.lista-detalles li strong {
+    color: #007bff;
+}

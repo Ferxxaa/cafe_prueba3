@@ -1,0 +1,68 @@
+
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/registro-styles.css' %}">
+<div class="contenedor-login">
+    <form method="POST" action="{% url 'registro_cliente' %}" class="form-login">
+        {% csrf_token %}
+        <div class="login-header">
+            <h2>Baristas</h2>
+            
+        </div>
+
+        {% if mensaje %}
+            <div class="alert alert-danger my-3" role="alert">
+                {{mensaje}}
+            </div>
+        {% else %}
+
+        {% endif %}
+
+        <div class="form-group">
+            <label for="nombre_usuario">Nombre de usuario</label>
+            <input type="text" class="form-control" id="nombre_usuario" name="nombre_user" placeholder="Ejemplo: PanConQueso">
+        </div>
+
+        <div class="form-group">
+            <label for="contra_usuario">Nombre</label>
+            <input type="text" class="form-control" id="nom_real1" name="nombre" placeholder="Juan">
+        </div>
+
+        <div class="form-group">
+            <label for="contra_usuario">Primer Apellido</label>
+            <input type="text" class="form-control" id="p_apellido" name="pri_apellido" placeholder="Balmaceda">
+        </div>
+
+        <div class="form-group">
+            <label for="contra_usuario">Segundo Apellido</label>
+            <input type="text" class="form-control" id="s_apellido" name="seg_apellido" placeholder="Torres">
+        </div>
+
+        <div class="form-group">
+            <label for="contra_usuario">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correo_id" name="email" placeholder="example@gmail.com">
+        </div>
+
+        <div class="form-group">
+            <label for="contra_usuario">Contraseña</label>
+            <input type="password" class="form-control" id="contra_usuario" name="contra_user" placeholder="Nunca comparta su contraseña">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+        <hr>
+    </form>
+</div>
+
+    <!-- <script type="module" href="{% static 'JS/main.js' %}"></script> -->
+
+    <!--
+        Cosas que agregar en el registro
+
+        Nombre de Usuario
+        Nombre Real
+        Apellido Real
+        Contraseña
+    -->
+
+{% endblock %} 

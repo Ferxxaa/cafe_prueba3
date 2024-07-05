@@ -1,0 +1,47 @@
+{% load static %}  <!-- Asegúrate de cargar la biblioteca de etiquetas estáticas al principio -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Aquí van tus etiquetas meta, título, y otras referencias CSS y JS -->
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">  <!-- Utiliza correctamente la etiqueta static para cargar tu archivo CSS -->
+</head>
+<body>
+
+<header>
+    <!-- Contenido de tu header aquí -->
+</header>
+
+<main>
+    <div class="login-container">
+        <form method="POST" class="form-login">
+            {% csrf_token %}
+            <div class="login-header">
+                <h2>Iniciar sesión</h2>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Usuario:</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Iniciar sesión">
+            <hr>
+            <p>¿No tienes una cuenta?</p>
+            <p style="font-size: 1.4em;"><a href="{% url 'registro_cliente' %}"><b>Regístrate</b></a></p>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <!-- Contenido de tu footer aquí -->
+</footer>
+
+</body>
+</html>

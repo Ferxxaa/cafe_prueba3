@@ -1,0 +1,72 @@
+{% extends 'proyecto/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="alert alert-primary" role="alert">
+        <h2 class="text-center mb-4">CARRITO DE COMPRAS</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Total</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if request.session.carrito.items %}
+                        {% for key, value in request.session.carrito.items %}
+                            <tr>
+                                <td>{{ value.nombre }}</td>
+                                <td>${{ value.precio }}</td>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a href="{% url 'Sub' value.producto_id %}" class="btn btn-sm btn-outline-secondary">-</a>
+                                        </span>
+                                        <input type="text" class="form-control text-center" value="{{ value.cantidad }}" readonly>
+                                        <span class="input-group-btn">
+                                            <a href="{% url 'Add' value.producto_id %}" class="btn btn-sm btn-outline-secondary">+</a>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>${{ value.acumulado }}</td>
+                                <td>
+                                    <a href="{% url 'Del' value.producto_id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5">
+                                <div class="alert alert-danger text-center">El carrito está vacío.</div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3" class="text-end">Total:</th>
+                        <td colspan="2" class="fw-bold">${{ total_carrito }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row mt-4">
+            <div class="col text-end">
+                <a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar Carrito</a>
+            </div>
+            <div class="col text-start">
+                <a href="{% url 'factura' %}" class="btn btn-success">Finalizar Compra</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enlace al archivo CSS -->
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+{% endblock %}
